@@ -43,10 +43,7 @@ class Tile
 		}
     void updateTile(){
     //  cout << x << " " << y << endl;
-      if (x < destx){ x+=1; }
-      if (x > destx){ x-=1; }
-      if (y < desty){ y+=1; }
-      if (y > desty){ y-=1; }
+
     }
 
 
@@ -96,11 +93,19 @@ class ofApp : public ofBaseApp{
 		 "s", "t", "u", "v", "w", "x", "y", "z"};
 
 		int index;
-		ofxGIF::fiGifLoader gif;
-		Tile testtile;
-    vector <Tile> tiles;
+		Tile niltile;
     ofImage img;
     int tileSize = 75;
     ofTrueTypeFont font;
+
+    Tile world[7][5] = {
+      {niltile, niltile, niltile, niltile, niltile},
+      {niltile, niltile, niltile, niltile, niltile},
+      {niltile, niltile, niltile, niltile, niltile},
+      {niltile, niltile, niltile, niltile, niltile},
+      {niltile, niltile, niltile, niltile, niltile},
+      {niltile, niltile, niltile, niltile, niltile},
+      {niltile, niltile, niltile, niltile, niltile}
+    };
 
 };
