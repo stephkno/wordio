@@ -3,14 +3,26 @@
 #include "ofMain.h"
 #include "ofxGif.h"
 
+struct position
+{
+  int x;
+  int y;
+};
+
 class Tile
 {
   public:
 		int letter;
+
     int x;
     int y;
+
     int xv;
     int yv;
+
+    int destx;
+    int desty;
+
     int xhome;
     int yhome;
 
@@ -18,22 +30,25 @@ class Tile
 			letter = l;
 		}
 		void setPosition(int a, int b){
-			x = a;
-			y = b;
+			destx = a;
+			desty = b;
 		}
+
+    position getPosition(){
+
+      position pos;
+      pos.x = x;
+      pos.y = y;
+
+      return(pos);
+    }
 
     char getLetter(){
       return(letter);
     }
-		void drawTile(ofxGIF::fiGifLoader tiles){
+		void drawTile(ofxGIF::fiGifLoader tiles, int a, int b){
 
-			ofScale(0.3, 0.3);
 
-      cout << x << " " << y << endl;
-
-			tiles.pages[letter].draw(200*x, 200*y);
-
-      ofScale(0, 0);
 
 		}
 
@@ -59,12 +74,16 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		int alphabet[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-		 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+		string alphabet[26] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+		 "s", "t", "u", "v", "w", "x", "y", "z"};
 
 		int index;
 		ofxGIF::fiGifLoader gif;
 		Tile testtile;
     vector <Tile> tiles;
+    ofImage img;
+    int tileSize = 75;
+    ofTrueTypeFont font;
+
 
 };
