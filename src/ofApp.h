@@ -14,8 +14,8 @@ class Tile
   public:
 		int letter;
 
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
 
     int xv;
     int yv;
@@ -29,10 +29,26 @@ class Tile
 		void setLetter(int l){
 			letter = l;
 		}
+    position getTilePosition(){
+      position pos;
+      pos.x = x;
+      pos.y = y;
+      return(pos);
+    }
 		void setPosition(int a, int b){
-			destx = a;
-			desty = b;
+			//destx = a;
+			//desty = b;
+      x = a;
+      y = b;
 		}
+    void updateTile(){
+    //  cout << x << " " << y << endl;
+      if (x < destx){ x+=1; }
+      if (x > destx){ x-=1; }
+      if (y < desty){ y+=1; }
+      if (y > desty){ y-=1; }
+    }
+
 
     position getPosition(){
 
@@ -73,6 +89,8 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    position getPos(int x, int y);
+    int getTilePlaceInVect(int x, int y);
 
 		string alphabet[26] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
 		 "s", "t", "u", "v", "w", "x", "y", "z"};
@@ -84,6 +102,5 @@ class ofApp : public ofBaseApp{
     ofImage img;
     int tileSize = 75;
     ofTrueTypeFont font;
-
 
 };
