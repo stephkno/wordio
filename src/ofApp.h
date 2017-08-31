@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGif.h"
 
+
 struct position
 {
   int x;
@@ -26,9 +27,20 @@ class Tile
     int xhome;
     int yhome;
 
+    bool hidden = false;
+
 		void setLetter(int l){
 			letter = l;
 		}
+    bool toggleVisibility(){
+      if(hidden){
+        hidden = false;
+      }
+      else{
+        hidden = true;
+      }
+      return(hidden);
+    }
     position getTilePosition(){
       position pos;
       pos.x = x;
@@ -87,7 +99,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     position getPos(int x, int y);
-    int getTilePlaceInVect(int x, int y);
+    Tile *getTilePlaceInVect(int x, int y);
 
 		string alphabet[26] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
 		 "s", "t", "u", "v", "w", "x", "y", "z"};
@@ -107,5 +119,4 @@ class ofApp : public ofBaseApp{
       {niltile, niltile, niltile, niltile, niltile},
       {niltile, niltile, niltile, niltile, niltile}
     };
-
 };

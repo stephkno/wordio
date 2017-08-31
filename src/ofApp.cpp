@@ -5,10 +5,12 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+
+
   font.load("proggy.ttf", 55, true, true);
 
 
-  ofSetWindowShape(375, 667);
+  ofSetWindowShape(960, 1704);
   for(int x = 0; x < 5; x++){
     for(int y = 0; y < 7; y++){
 
@@ -37,8 +39,13 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+  ofScale(0.5, 0.5);
 
   ofBackground(50);
+
+  ofSetColor(0);
+  ofNoFill();
+  ofDrawRectangle(0, 0, 960, 1704);
 
   for(int y = 0; y < 7; y++){
     for(int x = 0; x < 5; x++){
@@ -52,6 +59,7 @@ void ofApp::draw(){
       //gif.pages[t.getLetter()].draw(a,b);
       ofSetColor(0);
       ofNoFill();
+
       ofDrawRectangle(a, b, 75, 75);
       ofSetColor(255);
       ofFill();
@@ -62,6 +70,23 @@ void ofApp::draw(){
     //  ofScale(0, 0);*/
     }
   }
+}
+
+Tile *ofApp::getTilePlaceInVect(int a, int b){
+  Tile *out;
+  for(int y = 0; y < 7; y++){
+    for(int x = 0; x < 5; x++){
+      Tile t = world[y][x];
+      position pos = t.getPosition();
+
+      if(pos.x == x && pos.y == y){
+
+        out = &t;
+
+      }
+    }
+  }
+  return(out);
 }
 
 position ofApp::getPos(int x, int y){
@@ -103,8 +128,8 @@ void ofApp::mousePressed(int x, int y, int button){
   int a = getPos(x, y).x;
   int b = getPos(x, y).y;
 
+  getTilePlaceInVect(a, b)->toggleVisibility();
 
-  
 
 }
 
