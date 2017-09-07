@@ -23,7 +23,7 @@ void ofApp::setup(){
   font.load("proggy.ttf", 100, true, true);
   tileSize = ofGetScreenWidth()/5;
   //populate world
-  for(int x = 0; x < 5; x++){
+  for(int x = 0; x <= 5; x++){
     for(int y = 0; y < 7; y++){
 
       Tile newtile;
@@ -33,21 +33,29 @@ void ofApp::setup(){
       tiles.push_back(newtile);
       tiles.back().setPosition(x, y);
       tiles.back().setLetter(ofRandom(25));
-      world[y][x] = &tiles.back();
 
+
+    }
+  }
+  int i = 0;
+  for(int x = 0; x < 5; x++){
+    for(int y = 0; y < 7; y++){
+      world[y][x] = &tiles[i];
+      i++;
     }
   }
   updateWorld();
 }
 //fall tiles
 void ofApp::updateWorld(){
-  for(int y = 6; y > 0; y--){
+  for(int y = 6; y >= 0; y--){
     for(int x = 0; x < 5; x++){
-      cout << world[y][x]->letter << endl;
+      cout << world[y][x]->getLetter() << " ";
     }
+    cout << endl;
   }
   for( Tile t : tiles){
-    cout << ":" << t.letter << endl;
+    cout << ":" << t.letter;
   }
 }
 //reset words creates a vector of wordlist pointers
